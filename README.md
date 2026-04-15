@@ -1,24 +1,81 @@
-# Global Labour Compliance Navigator
+# GloWoCo
 
-This repository contains a lightweight prototype for a global labour compliance app. The current version is intentionally dependency-free so it can be opened locally and extended quickly.
+GloWoCo is the Global Workforce Compliance Tool. This repository contains a dependency-free web prototype for navigating workforce compliance across regions, countries, and legal entities, with dedicated assessment flows for current-entity compliance review and acquisition due diligence.
 
-## What the prototype does
+## What the tool does
 
-- Consolidates example labour compliance requirements by country.
-- Adjusts review output based on latest headcount, decision type, worker category, and urgency.
-- Surfaces key requirements, required documents, process steps, and external support needs.
-- Demonstrates the structure needed for hiring and termination workflows.
+- Provides role-based access across global, regional, and country teams.
+- Organizes the company footprint by region, country, and entity.
+- Differentiates between current operations and potential acquisition countries.
+- Surfaces country guidance for:
+  - general compliance context
+  - labor code summary
+  - statutory benefits
+  - hiring
+  - termination
+  - visa process
+  - global mobility
+  - performance management
+- Supports entity-level Compliance Gap Analysis with:
+  - six compliance categories
+  - bare minimum requirements
+  - mandatory records
+  - document proof capture
+  - comments and status updates
+- Supports Acquisition Review with:
+  - target entity intake
+  - country-specific diligence workstreams
+  - evidence review
+  - submission workflow
+  - exportable diligence summary
 
-## Files
+## Current product structure
 
-- `index.html`: Application shell and UI layout.
-- `styles.css`: Visual design and responsive layout.
-- `data.js`: Example country rules and decision datasets.
-- `app.js`: Client-side rules engine and rendering logic.
+### Home workspace
+
+The home page is the main navigation layer. It includes:
+
+- a compact compliance dashboard
+- role and footprint filtering
+- region-based footprint navigation
+- country and entity selection
+- country-level workflow tabs
+- direct links to the two dedicated assessment pages
+
+### Compliance Gap Analysis
+
+This dedicated page is used for current owned entities. It includes:
+
+- an in-scope regional hero dashboard
+- assessment context controls
+- country requirement coverage tabs
+- compliance category tabs
+- proof and comment capture for each category
+
+### Acquisition Review
+
+This dedicated page is used for target-company workforce due diligence. It includes:
+
+- target profile intake via modal
+- generated diligence workstreams based on target facts
+- evidence review by diligence category
+- draft, submit, and export actions
+
+## Main files
+
+- `index.html`: Home page for GloWoCo.
+- `app.js`: Main workspace rendering, role logic, country workspace, home-page dashboard, and modal behavior.
+- `compliance-gap-analysis.html`: Dedicated page for compliance review of current entities.
+- `gap-analysis.js`: Compliance Gap Analysis page logic, assessment scoring, and in-scope regional dashboard.
+- `acquisition-review.html`: Dedicated page for acquisition due diligence.
+- `acquisition-review.js`: Acquisition Review logic, target profile handling, diligence workstreams, submission flow, and summary export.
+- `data.js`: Example regions, countries, roles, entities, and workflow content.
+- `styles.css`: Shared styling across the home page and both dedicated assessment pages.
+- `DEMO-SCRIPT.md`: Presenter-ready script for recording a product demo.
 
 ## How to run
 
-Open `index.html` directly in a browser, or serve the folder with Python:
+Open `index.html` directly in a browser, or serve the folder locally:
 
 ```powershell
 python -m http.server 8000
@@ -26,20 +83,22 @@ python -m http.server 8000
 
 Then open `http://localhost:8000`.
 
-## Suggested production architecture
+## Notes on the prototype
 
-1. Use an HRIS integration layer to ingest live headcount by country, entity, and worker type.
-2. Store compliance rules in a governed content model with version history, owners, effective dates, and source links.
-3. Add workflow states for draft, legal review, approved, and archived decisions.
-4. Separate legal content into reusable modules:
-   - hiring
-   - termination
-   - documentation
-   - approvals
-   - external advisor triggers
-5. Add role-based views for HR operations, legal, people leaders, and finance.
-6. Add an audit trail for who reviewed a decision and which rule version was applied.
+- The app is currently client-side only.
+- Assessment state is stored in browser local storage.
+- File uploads in the assessment flows are prototype-level and do not persist to a shared backend.
+- Country and entity content is sample product content for structure and design, not production legal advice.
+
+## Suggested next production steps
+
+1. Replace sample legal content with validated country-specific content owned by People and Legal teams.
+2. Move assessment state, comments, and uploads to a shared backend or governed repository.
+3. Add authentication so the user role is derived from the signed-in user rather than selected manually.
+4. Add workflow states and approvals for draft, submitted, under review, approved, and escalated outcomes.
+5. Add source references, effective dates, and version history for each country rule and requirement.
+6. Connect to HRIS, payroll, or entity master data so headcount and entity context can be live rather than static.
 
 ## Important note
 
-The legal content in `data.js` is sample guidance for prototyping the app shape. Before real-world use, each jurisdiction should be validated against current employment law requirements and maintained through an update process with legal review.
+This project is a prototype for product design and workflow modeling. Before production use, each jurisdiction, requirement, and decision flow should be validated against current law and maintained through a controlled update process with legal review.
