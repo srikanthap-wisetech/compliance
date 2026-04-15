@@ -1,3 +1,4 @@
+# Howdy WiseTech :)
 # GloWoCo
 
 GloWoCo is the Global Workforce Compliance Tool. This repository contains a dependency-free web prototype for navigating workforce compliance across regions, countries, and legal entities, with dedicated assessment flows for current-entity compliance review and acquisition due diligence.
@@ -90,15 +91,7 @@ Then open `http://localhost:8000`.
 - File uploads in the assessment flows are prototype-level and do not persist to a shared backend.
 - Country and entity content is sample product content for structure and design, not production legal advice.
 
-## Suggested next production steps
-
-1. Replace sample legal content with validated country-specific content owned by People and Legal teams.
-2. Move assessment state, comments, and uploads to a shared backend or governed repository.
-3. Add authentication so the user role is derived from the signed-in user rather than selected manually.
-4. Add workflow states and approvals for draft, submitted, under review, approved, and escalated outcomes.
-5. Add source references, effective dates, and version history for each country rule and requirement.
-6. Connect to HRIS, payroll, or entity master data so headcount and entity context can be live rather than static.
 
 ## Important note
 
-This project is a prototype for product design and workflow modeling. Before production use, each jurisdiction, requirement, and decision flow should be validated against current law and maintained through a controlled update process with legal review.
+Sri: This project is a prototype for product design and workflow modeling. Before production use, each jurisdiction, requirement, and decision flow should be validated against current law and maintained through a controlled update process with legal review.
