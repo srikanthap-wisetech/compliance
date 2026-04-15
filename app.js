@@ -41,6 +41,27 @@ const storageKeys = {
   proofs: "gwct-proof-store-v3"
 };
 
+function countryRiskLevel(country) {
+  return country.riskLevel || (country.highRisk ? "high" : "moderate");
+}
+
+function countryRiskLabel(country) {
+  const labels = {
+    high: "High termination / restructuring risk",
+    moderate: "Moderate termination / restructuring risk",
+    lower: "Lower termination / restructuring risk"
+  };
+  return labels[countryRiskLevel(country)] || labels.moderate;
+}
+
+function countryRiskCounts(countriesInScope) {
+  return countriesInScope.reduce((summary, country) => {
+    const level = countryRiskLevel(country);
+    summary[level] = (summary[level] || 0) + 1;
+    return summary;
+  }, { high: 0, moderate: 0, lower: 0 });
+}
+
 function setToolSummaryOpen(nextOpen) {
   toolSummaryModal.classList.toggle("hidden", !nextOpen);
 }
@@ -604,7 +625,7 @@ function renderHeroDashboard(allowedCountries) {
   const compliantEntities = allEntities.filter((item) => item.assessment.label === "Compliant").length;
   const reviewEntities = allEntities.filter((item) => item.assessment.label === "Review in progress").length;
   const gapEntities = allEntities.filter((item) => item.assessment.label === "Gap identified").length;
-  const highRiskCountries = allowedCountries.filter((country) => country.highRisk).length;
+  const riskCounts = countryRiskCounts(allowedCountries);
 
   dashboardTitleNode.textContent = currentRole().type === "global"
     ? "Global workforce compliance oversight"
@@ -616,7 +637,7 @@ function renderHeroDashboard(allowedCountries) {
     <div class="dashboard-pill success">${compliantEntities} compliant</div>
     <div class="dashboard-pill warning">${reviewEntities} in review</div>
     <div class="dashboard-pill danger">${gapEntities} gaps</div>
-    <div class="dashboard-pill neutral">${highRiskCountries} high-risk countries</div>
+    <div class="dashboard-pill neutral">${riskCounts.high} high | ${riskCounts.moderate} moderate | ${riskCounts.lower} lower</div>
   `;
 
   const grouped = regions.map((region) => {
@@ -631,7 +652,7 @@ function renderHeroDashboard(allowedCountries) {
       countries: regionCountries.length,
       compliant,
       total,
-      highRisk: regionCountries.filter((country) => country.highRisk).length
+      risks: countryRiskCounts(regionCountries)
     };
   });
 
@@ -639,7 +660,7 @@ function renderHeroDashboard(allowedCountries) {
     <article class="dashboard-region-card">
       <div>
         <strong>${item.region}</strong>
-        <span>${item.countries} countries | ${item.highRisk} high-risk</span>
+        <span>${item.countries} countries | ${item.risks.high} high | ${item.risks.moderate} moderate | ${item.risks.lower} lower</span>
       </div>
       <div>
         <strong>${item.compliant}/${item.total}</strong>
@@ -1014,7 +1035,7 @@ function renderRegions(allowedCountries) {
         <div>
           <span class="kicker">${state.regionId}</span>
           <h3>${state.regionId} Countries</h3>
-          <p class="muted-copy">High-risk countries: ${activeRegionCountries.filter((country) => country.highRisk).length}</p>
+          <p class="muted-copy">Termination / restructuring risk: ${countryRiskCounts(activeRegionCountries).high} high | ${countryRiskCounts(activeRegionCountries).moderate} moderate | ${countryRiskCounts(activeRegionCountries).lower} lower</p>
           <p class="muted-copy">Entities: ${activeRegionCountries.reduce((sum, country) => sum + entitySplit(country.code).total, 0)} | Core: ${activeRegionCountries.reduce((sum, country) => sum + entitySplit(country.code).core, 0)} | Acquired: ${activeRegionCountries.reduce((sum, country) => sum + entitySplit(country.code).acquired, 0)} | Targets: ${activeRegionCountries.reduce((sum, country) => sum + entitySplit(country.code).target, 0)}</p>
         </div>
         <span class="region-count">${activeRegionCountries.length}</span>
@@ -1025,7 +1046,7 @@ function renderRegions(allowedCountries) {
             <strong>${country.name}</strong>
             <span>${country.statusLabel} | ${country.entityModel}</span>
             <span>Entities: ${entitySplit(country.code).total} | Core: ${entitySplit(country.code).core} | Acquired: ${entitySplit(country.code).acquired} | Targets: ${entitySplit(country.code).target}</span>
-            ${country.highRisk ? `<span class="risk-flag">High risk country</span>` : ""}
+            <span class="risk-flag">${countryRiskLabel(country)}</span>
           </button>
         `).join("")}
       </div>
@@ -1082,7 +1103,7 @@ function renderWorkspace(country) {
   const entity = currentEntity();
   const assessment = entityAssessment(entity);
   countryNameNode.textContent = country.name;
-  countryMetaNode.textContent = `${country.entityModel} | ${country.highRisk ? "High risk country" : "Standard risk country"} | ${country.labourCode.overview}`;
+  countryMetaNode.textContent = `${country.entityModel} | ${countryRiskLabel(country)} | ${country.complexityReason}`;
   countryRegionNode.textContent = country.region;
   countryStatusNode.textContent = country.statusLabel;
   entityStatusNode.textContent = assessment.label;

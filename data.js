@@ -23,7 +23,7 @@ window.complianceData = {
   ],
   countries: [
     {
-      code: "AU", name: "Australia", region: "APAC", entityModel: "Local employing entity", highRisk: false,
+      code: "AU", name: "Australia", region: "APAC", entityModel: "Local employing entity", riskLevel: "moderate", complexityReason: "Awards, procedural fairness, discrimination risk, and redundancy consultation make termination and restructuring decisions materially sensitive.",
       operatingStatus: "current",
       statusLabel: "Current operation",
       labourCode: {
@@ -63,7 +63,7 @@ window.complianceData = {
       terminationGrounds: { grounds: [{ title: "Performance", notes: "Follow a documented performance process with clear expectations and evidence." }, { title: "Misconduct", notes: "Run fact-finding and provide procedural fairness before deciding." }, { title: "Redundancy", notes: "Review consultation, redeployment, and communication planning." }, { title: "Probation", notes: "Check contract terms and keep decision-making consistent and documented." }] }
     },
     {
-      code: "IN", name: "India", region: "APAC", entityModel: "Local entity with state-specific overlays", highRisk: true,
+      code: "IN", name: "India", region: "APAC", entityModel: "Local entity with state-specific overlays", riskLevel: "high", complexityReason: "Employee-category rules, state-level variation, industrial-relations sensitivity, and settlement requirements create high termination and restructuring risk.",
       operatingStatus: "current",
       statusLabel: "Current operation",
       labourCode: {
@@ -103,7 +103,7 @@ window.complianceData = {
       terminationGrounds: { grounds: [{ title: "Performance", notes: "Document expectations, review periods, and support offered." }, { title: "Misconduct", notes: "Investigate carefully and confirm whether a formal inquiry is expected." }, { title: "Retrenchment", notes: "Assess statutory conditions, notice, payment implications, and industrial-relations risk." }, { title: "Abandonment", notes: "Confirm facts and retain outreach records before closing employment." }] }
     },
     {
-      code: "SG", name: "Singapore", region: "APAC", entityModel: "Regional hub entity", highRisk: false,
+      code: "SG", name: "Singapore", region: "APAC", entityModel: "Regional hub entity", riskLevel: "lower", complexityReason: "Termination risk is lower because the framework is comparatively contract-driven, though documentation and fair-employment controls still matter.",
       operatingStatus: "current",
       statusLabel: "Current operation",
       labourCode: {
@@ -143,7 +143,7 @@ window.complianceData = {
       terminationGrounds: { grounds: [{ title: "Performance", notes: "Use a structured performance plan and evidence-based review." }, { title: "Misconduct", notes: "Preserve evidence, investigate, and ensure a fair process." }, { title: "Redundancy", notes: "Check communication, selection, and support planning carefully." }, { title: "Mutual separation", notes: "Document voluntary agreement terms and payment treatment clearly." }] }
     },
     {
-      code: "UK", name: "United Kingdom", region: "EMEA", entityModel: "UK employing entity", highRisk: true,
+      code: "UK", name: "United Kingdom", region: "EMEA", entityModel: "UK employing entity", riskLevel: "high", complexityReason: "Fair-process obligations, discrimination and whistleblowing exposure, and collective consultation risk make termination and restructuring high risk.",
       operatingStatus: "current",
       statusLabel: "Current operation",
       labourCode: {
@@ -183,7 +183,7 @@ window.complianceData = {
       terminationGrounds: { grounds: [{ title: "Capability / performance", notes: "Use a documented capability process with support and clear expectations." }, { title: "Misconduct", notes: "Investigate carefully and align with disciplinary process expectations." }, { title: "Redundancy", notes: "Review consultation, selection, redeployment, and communication planning." }, { title: "SOSR", notes: "Use legal review early because fairness and reasonableness are fact-specific." }] }
     },
     {
-      code: "FR", name: "France", region: "EMEA", entityModel: "French employing entity", highRisk: true,
+      code: "FR", name: "France", region: "EMEA", entityModel: "French employing entity", riskLevel: "high", complexityReason: "Representation, consultation, documentation, and formal termination routes make France high risk for exits and workforce restructuring.",
       operatingStatus: "current",
       statusLabel: "Current operation",
       labourCode: {
@@ -223,7 +223,7 @@ window.complianceData = {
       terminationGrounds: { grounds: [{ title: "Performance", notes: "Document support and performance history carefully before action." }, { title: "Misconduct", notes: "Use a rigorous investigation and evidence standard." }, { title: "Economic / restructuring", notes: "Assess consultation and representation exposure before any programme." }, { title: "Mutual separation", notes: "Use local legal review on documentation and payment terms." }] }
     },
     {
-      code: "NL", name: "Netherlands", region: "EMEA", entityModel: "Dutch employing entity", highRisk: false,
+      code: "NL", name: "Netherlands", region: "EMEA", entityModel: "Dutch employing entity", riskLevel: "high", complexityReason: "Structured dismissal routes, incapacity-related rules, and process-heavy exit governance create high termination and restructuring risk.",
       operatingStatus: "current",
       statusLabel: "Current operation",
       labourCode: {
@@ -263,7 +263,7 @@ window.complianceData = {
       terminationGrounds: { grounds: [{ title: "Performance", notes: "Use documented support and review history." }, { title: "Misconduct", notes: "Retain evidence and use local review on seriousness and process." }, { title: "Restructuring", notes: "Check process, consultation, and communications before action." }, { title: "Long-term incapacity", notes: "Use local legal and HR review before relying on this route." }] }
     },
     {
-      code: "US", name: "United States", region: "Americas", entityModel: "US entity with state-specific overlays", highRisk: true,
+      code: "US", name: "United States", region: "Americas", entityModel: "US entity with state-specific overlays", riskLevel: "high", complexityReason: "Protected leave, retaliation exposure, state final-pay rules, and layoff sensitivity create high termination and restructuring risk.",
       operatingStatus: "current",
       statusLabel: "Current operation",
       labourCode: {
@@ -303,7 +303,7 @@ window.complianceData = {
       terminationGrounds: { grounds: [{ title: "Performance", notes: "Keep performance records, coaching history, and consistency checks before action." }, { title: "Misconduct", notes: "Investigate, preserve evidence, and assess proportionality and consistency." }, { title: "Layoff / RIF", notes: "Run structured legal review on selection, notice, and adverse-impact style risk." }, { title: "Policy violation", notes: "Confirm prior guidance, evidence, and consistent application." }] }
     },
     {
-      code: "DE", name: "Germany", region: "EMEA", entityModel: "Potential acquisition target structure", highRisk: true,
+      code: "DE", name: "Germany", region: "EMEA", entityModel: "Potential acquisition target structure", riskLevel: "high", complexityReason: "Dismissal protections, works council exposure, and consultation obligations make termination and restructuring especially high risk.",
       operatingStatus: "planned",
       statusLabel: "Potential acquisition country",
       labourCode: {
@@ -343,7 +343,7 @@ window.complianceData = {
       terminationGrounds: { grounds: [{ title: "Performance", notes: "Treat inherited performance cases as legally controlled and review before action." }, { title: "Misconduct", notes: "Diligence target-company investigation standards and open cases." }, { title: "Business restructuring", notes: "Review consultation and representation implications before any post-close action." }, { title: "Probation", notes: "Check inherited probation terms and local process expectations before relying on them." }] }
     },
     {
-      code: "CA", name: "Canada", region: "Americas", entityModel: "Potential acquisition target structure", highRisk: false,
+      code: "CA", name: "Canada", region: "Americas", entityModel: "Potential acquisition target structure", riskLevel: "moderate", complexityReason: "Province-specific notice, severance, and termination governance make exits and restructuring decisions more controlled and moderately elevated in risk.",
       operatingStatus: "planned",
       statusLabel: "Potential acquisition country",
       labourCode: {
