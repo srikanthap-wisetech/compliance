@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acquisition Review | GloWoCo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="assessment-page">
+  <div class="page-shell">
+    <header class="panel assessment-hero">
+      <div class="assessment-hero-head">
+        <a class="back-link" href="index.html">Back to workspace</a>
+        <span class="kicker">Dedicated Assessment Page</span>
+      </div>
+      <div class="assessment-hero-body">
+        <div>
+          <h1 class="assessment-title">Acquisition Review</h1>
+          <p class="hero-text">
+            Run country-specific workforce due diligence for a target company or entity, collect the
+            supporting facts and document proofs, and assess acquisition-side compliance risk before close.
+          </p>
+        </div>
+        <div class="assessment-summary-grid" id="acquisition-summary"></div>
+      </div>
+    </header>
+
+    <main class="assessment-layout">
+      <aside class="panel assessment-sidebar">
+        <div class="panel-heading">
+          <h2>Review Context</h2>
+          <p>Set the reviewing role, country, and current entity context before capturing target-company diligence inputs.</p>
+        </div>
+
+        <label class="field">
+          <span>Role</span>
+          <select id="acquisition-role"></select>
+        </label>
+
+        <label class="field">
+          <span>Country</span>
+          <select id="acquisition-country"></select>
+        </label>
+
+        <label class="field">
+          <span>Current Entity Context</span>
+          <select id="acquisition-entity"></select>
+        </label>
+
+        <div class="access-card">
+          <span class="kicker">Target Profile</span>
+          <h3 id="target-profile-name">Not yet captured</h3>
+          <p id="target-profile-summary" class="muted-copy"></p>
+          <div id="target-profile-tags" class="tag-row"></div>
+          <button type="button" class="button-primary" id="open-intake-modal-button">Edit Target Profile</button>
+        </div>
+
+        <div class="access-card">
+          <span class="kicker">Role Permissions</span>
+          <h3 id="acquisition-role-name">-</h3>
+          <p id="acquisition-role-summary" class="muted-copy"></p>
+          <div id="acquisition-role-tags" class="tag-row"></div>
+        </div>
+
+        <div class="panel-heading compact">
+          <h2>Submission Workflow</h2>
+          <p>Save your diligence draft, submit a locked version for review, and export a summary for People, Legal, and M&amp;A stakeholders.</p>
+        </div>
+        <div id="submission-banner"></div>
+        <div class="submission-actions">
+          <button type="button" class="button-secondary" id="save-draft-button">Save Draft</button>
+          <button type="button" class="button-primary" id="submit-review-button">Submit for Review</button>
+          <button type="button" class="button-secondary" id="export-summary-button">Export Diligence Summary</button>
+        </div>
+      </aside>
+
+      <section class="panel assessment-main">
+        <section class="assessment-section">
+          <div class="panel-heading compact">
+            <h2>Country Due Diligence Process</h2>
+            <p>Review the local process, key diligence questions, and proof expectations for the target country before completing the intake form.</p>
+          </div>
+          <div id="acquisition-process-content"></div>
+        </section>
+
+        <section class="assessment-section">
+          <div class="panel-heading compact">
+            <h2>Assessment Workspace</h2>
+            <p>Review the generated diligence categories, collect proof against each requirement, and return to the target profile modal whenever the intake needs updating.</p>
+          </div>
+          <div id="diligence-category-tabs" class="gap-tab-bar"></div>
+          <div id="diligence-category-content"></div>
+        </section>
+
+        <section class="assessment-section">
+          <div class="panel-heading compact">
+            <h2>Submission Summary</h2>
+            <p>Once submitted, this becomes the working diligence snapshot for downstream review, escalation, and remediation planning.</p>
+          </div>
+          <div id="submission-summary-content"></div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-shell hidden" id="intake-modal-shell">
+    <div class="modal-backdrop" id="intake-modal-backdrop"></div>
+    <section class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="intake-modal-title">
+      <div class="section-head-row">
+        <div>
+          <span class="kicker">Target Entity Intake</span>
+          <h2 id="intake-modal-title">Capture Target Facts</h2>
+          <p class="muted-copy">Complete the target profile here, then save it back into the diligence workspace to regenerate the local requirements and triggered workstreams.</p>
+        </div>
+        <button type="button" class="button-secondary" id="close-intake-modal-button">Close</button>
+      </div>
+
+      <div class="content-grid modal-form-grid">
+        <article class="content-panel">
+          <h3>Transaction and footprint</h3>
+          <div class="controls">
+            <label class="field"><span>Target Company Name</span><input id="target-company-name" type="text" placeholder="Example: TargetCo Germany GmbH"></label>
+            <label class="field"><span>Transaction Stage</span><select id="transaction-stage"><option value="screening">Screening</option><option value="due_diligence">Due diligence</option><option value="signing">Signing preparation</option><option value="integration">Integration planning</option></select></label>
+            <label class="field"><span>Target Workforce Size</span><input id="target-headcount" type="number" min="0" step="1" value="75"></label>
+            <label class="field"><span>Entity count</span><input id="profile-entityCount" type="number" min="1" step="1"></label>
+            <label class="field"><span>Locations</span><input id="profile-locations" type="number" min="1" step="1"></label>
+            <label class="field"><span>Multi-state / province footprint</span><select id="profile-multiRegion"><option value="yes">Yes</option><option value="no">No</option></select></label>
+            <label class="field"><span>Assessment Notes</span><textarea id="acquisition-notes" rows="4" placeholder="Capture key diligence themes, known gaps, or assumptions from People and Legal teams."></textarea></label>
+          </div>
+        </article>
+
+        <article class="content-panel">
+          <h3>Workforce and operating model</h3>
+          <div class="controls">
+            <label class="field"><span>Employee representatives</span><select id="profile-employeeRepresentatives"><option value="yes">Yes</option><option value="no">No</option><option value="unknown">Unknown</option></select></label>
+            <label class="field"><span>Collective coverage</span><select id="profile-collectiveCoverage"><option value="yes">Yes</option><option value="no">No</option><option value="unknown">Unknown</option></select></label>
+            <label class="field"><span>Payroll model</span><select id="profile-payrollModel"><option value="centralised">Centralised</option><option value="outsourced">Outsourced</option><option value="fragmented">Fragmented</option><option value="unknown">Unknown</option></select></label>
+            <label class="field"><span>Sponsored workers</span><input id="profile-sponsoredWorkerCount" type="number" min="0" step="1"></label>
+            <label class="field"><span>Contractors</span><input id="profile-contractorCount" type="number" min="0" step="1"></label>
+            <label class="field"><span>Active disputes</span><input id="profile-activeDisputesCount" type="number" min="0" step="1"></label>
+            <label class="field"><span>Government inspections</span><select id="profile-governmentInspections"><option value="yes">Yes</option><option value="no">No</option><option value="unknown">Unknown</option></select></label>
+            <label class="field"><span>Recent restructuring</span><select id="profile-recentRestructure"><option value="yes">Yes</option><option value="no">No</option><option value="unknown">Unknown</option></select></label>
+            <label class="field"><span>Known payroll issues</span><select id="profile-knownPayrollIssues"><option value="yes">Yes</option><option value="no">No</option><option value="unknown">Unknown</option></select></label>
+            <label class="field"><span>Known misclassification</span><select id="profile-knownMisclassification"><option value="yes">Yes</option><option value="no">No</option><option value="unknown">Unknown</option></select></label>
+            <label class="field"><span>Known immigration issues</span><select id="profile-knownImmigrationIssues"><option value="yes">Yes</option><option value="no">No</option><option value="unknown">Unknown</option></select></label>
+            <label class="field"><span>Known privacy issues</span><select id="profile-knownPrivacyIssues"><option value="yes">Yes</option><option value="no">No</option><option value="unknown">Unknown</option></select></label>
+          </div>
+        </article>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="button-secondary" id="cancel-intake-modal-button">Cancel</button>
+        <button type="button" class="button-primary" id="save-intake-modal-button">Save Target Profile</button>
+      </div>
+    </section>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="acquisition-review.js"></script>
+</body>
+</html>

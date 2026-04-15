@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compliance Gap Analysis | GloWoCo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="assessment-page">
+  <div class="page-shell">
+    <header class="panel assessment-hero">
+      <div class="assessment-hero-head">
+        <a class="back-link" href="index.html">Back to workspace</a>
+        <span class="kicker">Dedicated Assessment Page</span>
+      </div>
+      <div class="assessment-hero-body">
+        <div>
+          <h1 class="assessment-title">Compliance Gap Analysis</h1>
+          <p class="hero-text">
+            Review country requirements across the full workforce compliance model, capture evidence and
+            document proofs, and assess entity status category by category.
+          </p>
+        </div>
+        <div class="hero-card assessment-hero-dashboard">
+          <p class="hero-card-label">Compliance Dashboard</p>
+          <p class="hero-card-value" id="assessment-dashboard-title">In-scope regions</p>
+          <div id="assessment-dashboard-summary" class="dashboard-summary"></div>
+          <div id="assessment-dashboard-list" class="dashboard-region-list"></div>
+        </div>
+      </div>
+    </header>
+
+    <main class="assessment-layout">
+      <aside class="panel assessment-sidebar">
+        <div class="panel-heading">
+          <h2>Assessment Context</h2>
+          <p>Set the role, jurisdiction, and entity before completing the review form.</p>
+        </div>
+
+        <label class="field">
+          <span>Role</span>
+          <select id="assessment-role"></select>
+        </label>
+
+        <label class="field">
+          <span>Country</span>
+          <select id="assessment-country"></select>
+        </label>
+
+        <label class="field">
+          <span>Entity</span>
+          <select id="assessment-entity"></select>
+        </label>
+
+        <div class="controls">
+          <label class="field">
+            <span>Latest Headcount</span>
+            <input id="assessment-headcount" type="number" min="0" step="1">
+          </label>
+
+          <label class="field">
+            <span>Worker Category</span>
+            <select id="assessment-worker-type">
+              <option value="employee">Employee</option>
+              <option value="contractor">Contractor</option>
+              <option value="senior">Senior leader</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>Urgency</span>
+            <select id="assessment-urgency">
+              <option value="standard">Standard planning</option>
+              <option value="time-sensitive">Time-sensitive</option>
+              <option value="high-risk">High-risk / escalated</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>Assessment Notes</span>
+            <textarea id="assessment-notes" rows="4" placeholder="Capture local context, remediation assumptions, or questions for People and Legal teams."></textarea>
+          </label>
+        </div>
+
+        <div class="access-card">
+          <span class="kicker">Role Permissions</span>
+          <h3 id="permission-role-name">-</h3>
+          <p id="permission-summary" class="muted-copy"></p>
+          <div id="permission-tags" class="tag-row"></div>
+        </div>
+      </aside>
+
+      <section class="panel assessment-main">
+        <section class="assessment-section">
+          <div class="panel-heading compact">
+            <h2>Country Requirements Coverage</h2>
+            <p>Use these tabs to review the current country guidance from the full tool before completing the assessment inputs below.</p>
+          </div>
+          <div id="requirement-source-tabs" class="assessment-tab-bar"></div>
+          <div id="requirement-source-content"></div>
+        </section>
+
+        <section class="assessment-section">
+          <div class="panel-heading compact">
+            <h2>Assessment Form</h2>
+            <p>Capture the bare minimum controls, mandatory records, and document proofs needed to assess compliance status.</p>
+          </div>
+          <div id="gap-category-tabs" class="gap-tab-bar"></div>
+          <div id="gap-category-content"></div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="gap-analysis.js"></script>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GloWoCo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Global Workforce Compliance Tool</p>
+        <h1>GloWoCo</h1>
+        <p class="hero-text">
+          GloWoCo is a role-based workforce compliance workspace across regions, countries, legal entities, and decision
+          workflows. Built for global HR, Legal, Mobility, Payroll, and country teams to manage local
+          obligations, entity-level compliance gaps, acquisition due diligence, and decision guidance in
+          one coordinated workspace.
+        </p>
+        <button type="button" class="inline-link-button" id="open-tool-summary">
+          View Tool Summary
+        </button>
+      </div>
+      <div class="hero-card">
+        <p class="hero-card-label">Compliance Dashboard</p>
+        <p class="hero-card-value" id="dashboard-title">Global workforce compliance oversight</p>
+        <ul class="hero-stats">
+          <li><strong id="dashboard-regions">-</strong><span>regions in scope</span></li>
+          <li><strong id="dashboard-countries">-</strong><span>countries in scope</span></li>
+          <li><strong id="dashboard-entities">-</strong><span>entities tracked</span></li>
+        </ul>
+        <div id="dashboard-summary" class="dashboard-summary"></div>
+        <div id="dashboard-regions-list" class="dashboard-region-list"></div>
+      </div>
+    </header>
+
+    <main class="app-grid">
+      <aside class="panel sidebar">
+        <div class="panel-heading">
+          <h2>Access & Scope</h2>
+          <p>Set the user role and footprint view to reflect the countries, entities, and workflows visible in the tool.</p>
+        </div>
+
+        <label class="field">
+          <span>Role</span>
+          <select id="role-select" name="role"></select>
+        </label>
+
+        <label class="field">
+          <span>Footprint View</span>
+          <select id="footprint-filter" name="footprintFilter">
+            <option value="all">All countries</option>
+            <option value="current">Current operations only</option>
+            <option value="planned">Potential acquisition countries only</option>
+          </select>
+        </label>
+
+        <div class="access-card">
+          <span class="kicker">Role Scope</span>
+          <h3 id="role-name">-</h3>
+          <p id="role-description" class="muted-copy"></p>
+          <div id="scope-tags" class="tag-row"></div>
+        </div>
+
+        <div class="panel-heading compact">
+          <h2>Decision Context</h2>
+          <p>These inputs refine the guidance shown in Hiring, Termination, and related workflow views for the selected entity.</p>
+        </div>
+
+        <form class="controls">
+          <label class="field">
+            <span>Entity</span>
+            <select id="entity-select" name="entity"></select>
+          </label>
+
+          <label class="field">
+            <span>Latest Headcount</span>
+            <input id="headcount" name="headcount" type="number" min="0" step="1" value="45">
+          </label>
+
+          <label class="field">
+            <span>Worker Category</span>
+            <select id="worker-type" name="workerType">
+              <option value="employee">Employee</option>
+              <option value="contractor">Contractor</option>
+              <option value="senior">Senior leader</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>Urgency</span>
+            <select id="urgency" name="urgency">
+              <option value="standard">Standard planning</option>
+              <option value="time-sensitive">Time-sensitive</option>
+              <option value="high-risk">High-risk / escalated</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>Scenario Notes</span>
+            <textarea id="notes" name="notes" rows="4" placeholder="Example: first employee in country, sponsored visa, misconduct termination, performance plan in progress"></textarea>
+          </label>
+        </form>
+
+        <div class="insight-strip">
+          <span class="kicker">Access Model</span>
+          <p>Global roles can work across the full footprint. Regional and country roles are restricted to the jurisdictions and entities they own.</p>
+        </div>
+
+        <div class="panel-heading compact">
+          <h2>Assessment</h2>
+          <p>Open the entity-level compliance review directly from the sidebar.</p>
+        </div>
+
+        <button id="gap-shortcut" class="sidebar-action" type="button">
+          Open Compliance Gap Analysis
+        </button>
+
+        <button id="acquisition-shortcut" class="sidebar-action secondary" type="button">
+          Open Acquisition Review
+        </button>
+      </aside>
+
+      <section class="main-column">
+        <section class="panel home-panel">
+          <div class="panel-heading">
+            <h2>Regional Footprint</h2>
+            <p>Countries are grouped by region with entity counts, risk markers, and footprint status so teams can navigate the operating model quickly.</p>
+          </div>
+
+          <div id="region-grid" class="region-grid"></div>
+        </section>
+
+        <section class="panel workspace-panel">
+          <div class="workspace-head">
+            <div>
+              <p class="eyebrow">Selected Jurisdiction</p>
+              <h2 id="country-name">-</h2>
+              <p id="country-meta" class="muted-copy"></p>
+            </div>
+            <div class="summary-grid">
+              <article class="summary-card">
+                <span class="summary-label">Region</span>
+                <strong id="country-region">-</strong>
+              </article>
+              <article class="summary-card">
+                <span class="summary-label">Footprint Status</span>
+                <strong id="country-status">-</strong>
+              </article>
+              <article class="summary-card">
+                <span class="summary-label">Entity Status</span>
+                <strong id="entity-status">-</strong>
+              </article>
+              <article class="summary-card">
+                <span class="summary-label">Headcount Band</span>
+                <strong id="headcount-band">-</strong>
+              </article>
+              <article class="summary-card">
+                <span class="summary-label">Support Signal</span>
+                <strong id="support-signal">-</strong>
+              </article>
+            </div>
+          </div>
+
+          <div id="tab-bar" class="tab-bar"></div>
+          <section id="tab-content" class="tab-content"></section>
+        </section>
+      </section>
+    </main>
+
+    <footer class="footer-note">
+      <p>
+        GloWoCo is designed to support jurisdiction-level compliance management,
+        entity oversight, and acquisition diligence. Production use requires current legal validation,
+        governed source data, and controlled update processes for each country and entity.
+      </p>
+    </footer>
+  </div>
+
+  <div class="modal-shell hidden" id="tool-summary-modal">
+    <div class="modal-backdrop" id="tool-summary-backdrop"></div>
+    <section class="modal-panel modal-panel-narrow" role="dialog" aria-modal="true" aria-labelledby="tool-summary-title">
+      <div class="section-head-row">
+        <div>
+          <span class="kicker">Tool Summary</span>
+          <h2 id="tool-summary-title">What GloWoCo Does</h2>
+        </div>
+        <button type="button" class="button-secondary" id="close-tool-summary">Close</button>
+      </div>
+
+      <div class="summary-block">
+        <p class="summary-note">
+          GloWoCo is the Global Workforce Compliance Tool. It gives global and in-country teams one place to understand workforce compliance requirements by region, country, and legal entity. It combines jurisdiction guidance, entity-level compliance status, and decision support for hiring, termination, mobility, performance, and local employment obligations.
+        </p>
+
+        <div class="summary-grid-dual">
+          <article class="summary-list-card">
+            <h4>What it covers</h4>
+            <ul class="result-list">
+              <li>Role-based access across global, regional, and country teams.</li>
+              <li>Regional footprint visibility across current operations and potential acquisition countries.</li>
+              <li>Country-level guidance for labor code summary, statutory benefits, hiring, termination, visa process, global mobility, and performance management.</li>
+              <li>Entity-level visibility across core WiseTech entities, acquired entities, and target acquisition entities.</li>
+            </ul>
+          </article>
+
+          <article class="summary-list-card">
+            <h4>How teams use it</h4>
+            <ul class="result-list">
+              <li>People and Legal teams review country rules and required process steps before decisions are made.</li>
+              <li>Country teams assess compliance gaps by uploading proofs, updating statuses, and capturing comments against mandatory requirements.</li>
+              <li>M&amp;A, Legal, and integration teams run workforce due diligence for acquisition targets using target facts, triggered workstreams, and risk outputs.</li>
+              <li>Leadership gets a compact regional dashboard with footprint, entity mix, risk markers, and status signals.</li>
+            </ul>
+          </article>
+        </div>
+
+        <article class="summary-list-card">
+          <h4>Assessment model</h4>
+          <p class="summary-note">
+            The tool supports two dedicated assessment modes. Compliance Gap Analysis helps owned entities assess ongoing compliance across six core categories using bare minimum requirements, mandatory records, and document proofs. Acquisition Review helps teams assess a target company by capturing target facts first, generating country-specific diligence workstreams, and then evaluating evidence, red flags, and remediation needs.
+          </p>
+        </article>
+
+        <article class="summary-list-card">
+          <h4>Why it matters</h4>
+          <p class="summary-note">
+            This tool is designed to reduce fragmented country knowledge, make entity-level compliance more transparent, and help teams move from static guidance to structured assessment. It is a decision-support and governance layer for workforce compliance, not a substitute for current local legal validation or controlled source-data ownership.
+          </p>
+        </article>
+      </div>
+    </section>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
+
