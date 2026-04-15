@@ -1,4 +1,4 @@
-# Howdy WiseTech :)
+# Namaste! :)
 # GloWoCo
 
 GloWoCo is the Global Workforce Compliance Tool. This repository contains a dependency-free web prototype for navigating workforce compliance across regions, countries, and legal entities, with dedicated assessment flows for current-entity compliance review and acquisition due diligence.
