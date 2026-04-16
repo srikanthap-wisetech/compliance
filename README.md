@@ -87,6 +87,7 @@ Then open `http://localhost:8000`.
 ## Notes on the prototype
 
 - The app is currently client-side only.
+- Data populated in the tool is all dummy data.
 - Assessment state is stored in browser local storage.
 - File uploads in the assessment flows are prototype-level and do not persist to a shared backend.
 - Country and entity content is sample product content for structure and design, not production legal advice.
